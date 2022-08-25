@@ -1,0 +1,72 @@
+ROM 0 (OUT / IN)
+
+INPUT
+8: PC
+9: RAM - ADDRESS
+A: EEPROM - ADDRESS
+B: REG A
+C: REG B
+D: REG I(instruction)
+E: RAM - Write(data)
+F: EEPROM - Write(data)
+
+OUTPUT
+8: PC 	  - OUT
+9: RAM    - OUT
+A: EEPROM - OUT
+B: REG A  - OUT
+C: REG B  - OUT
+D: ALU	  - OUT
+
+ROM 1 (SPECIAL)
+
+01: PC Increment
+02: ALU Carry In
+04: ALU B invert
+08: EEPROM_ARG
+10: JUMP
+20: NC
+40: NC
+80: STEP RESET
+
+
+
+Generelle Instruction Set Policy
+
+A wird direkt angesprochen und für Array addressierung verwendet, also EEPROM[A], RAM[A]
+
+B wird als Temporary genutzt.
+
+Operationen werden auf dem Ram ausgeführt
+z.B. mit Load x01 in A und dann Add x02
+wird x01 aus dem Ram in A geladen, danach x02 in B geladen und in A das Ergebnis der Addition A + B also x01 + x02 geschrieben
+
+
+
+
+
+
+
+INSTRUCTIONS:	16 schritte 0-15. 
+
+-Micros-
+[I/O]	xx xx xx xx xx xx xx xx xx xx xx xx xx xx xx xx	
+[Spec]	00 11 22 33 44 55 66 77 88 99 aa bb cc dd ee ff
+
+ALWAYS {
+
+Load Inst: 	
+I/O	A8	DA
+Spec	00	00
+
+End Inst:
+I/O						     00
+Spec	                                             81
+
+}
+
+Load EEPROM_arg[PC] in A:
+I/O		
+Spec	
+
+Load in B:
