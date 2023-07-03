@@ -11,14 +11,14 @@
 
 ---
 # Instruktionen
-- nop, 0x0   (No Instruction)
-- add, addr  (Ram[addr] = A + B)
-- sub, addr  (Ram[addr] = A - B)
-- lda, addr  (A = Ram[addr])
-- ldb, addr  (B = Ram[addr])
-- j,   addr  (PC = addr)
-- jzr, addr  (if A-B==0, PC = Ram[addr])
-- sr,  addr  (Temporary set [Ram address] = addr, to be combined with lri)
-- lri, imm   (Ram[Ram address] = imm)
-- disp, addr (Displays Ram[addr])
-- jz, addr   (if A-B==0, PC = addr)
+- 'nop, 0x0   (No Instruction)'
+- 'add, addr  (Ram[addr] = A + B)'
+- 'sub, addr  (Ram[addr] = A - B)'
+- 'lda, addr  (A = Ram[addr])'
+- 'ldb, addr  (B = Ram[addr])'
+- 'j,   addr  (PC = addr)'
+- 'jzr, addr  (if A-B==0, PC = Ram[addr])'
+- 'sr,  addr  (Temporary set [Ram address] = addr, to be combined with lri)'
+- 'lri, imm   (Ram[Ram address] = imm)'
+- 'disp, addr (Displays Ram[addr])'
+- 'jz, addr   (if A-B==0, PC = addr)'
