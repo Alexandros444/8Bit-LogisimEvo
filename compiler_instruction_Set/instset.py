@@ -59,45 +59,56 @@ def Inop():
     i = []
     return i
 
-# Add A and B in Reg[EEP[Arg]]
+# Add A and B in Reg[EPARG[PC]]
 def IaddABInReg():
     i = []
+    # RMA = EPARG[PC]
     i.append(((OUT.EP, IN.RMA), [SPEC.EPARG]))
+    # RM[RMA] = ALU (A + B)
     i.append(((OUT.ALU, IN.RM), []))
     return i
 
-# Sub B from A in Reg[EEP[Arg]]
+# Sub B from A in Reg[EPARG[PC]]
 def IsubABInReg():
     i = []
+    # RMA = EPARG[PC]
     i.append(((OUT.EP, IN.RMA), [SPEC.EPARG]))
+    # RM[RMA] = ALU (A + B)
     i.append(((OUT.ALU, IN.RM), [SPEC.ALUBINV,SPEC.ALUCIN]))
     return i
 
-# A = Reg[EEP[Arg]]
+# A = Reg[EPARG[PC]]
 def IloadA():
     i = []
+    # RMA = EPARG[PC]
     i.append(((OUT.EP, IN.RMA), [SPEC.EPARG]))
+    # A = RM[RMA]
     i.append(((OUT.RM, IN.AR), []))
     return i
 
-# B = Reg[EEP[Arg]]
+# B = Reg[EPARG[PC]]
 def IloadB():
     i = []
+    # RMA = EPARG[PC]
     i.append(((OUT.EP, IN.RMA), [SPEC.EPARG]))
+    # A = RM[RMA]
     i.append(((OUT.RM, IN.BR), []))
     return i
 
-# Jump to EEP[ARG]
+# Jump to EPARG[PC]
 def IJump():
     i = []
+    # PC = EPARG[PC]
     i.append(((OUT.EP, IN.PC), [SPEC.EPARG]))
     return i
 
 # Jump befehle Setzen PC auf anderen Wert
-# Jump if Alu-Zero to Reg[EEP[Arg]]     # Alu is Subtrackting
+# Jump if Alu-Zero to Reg[EPARG[PC]]     # Alu is Subtracting
 def IJumpZeroReg():
     i = []
+    # RMA = EPARG[PC]
     i.append(((OUT.EP, IN.RMA), [SPEC.EPARG]))
+    # ALU (A - B) == 0 ? PC = RM[RMA] : PC += 1;
     i.append(((OUT.RM, IN.NC), [SPEC.JUMP,SPEC.ALUBINV,SPEC.ALUCIN]))
     return i
 
