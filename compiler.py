@@ -14,7 +14,8 @@ code = [
     (c.add, r.s2),  #a
     (c.ldb, r.s2),  #b
     (c.disp, r.s2), #c
-    (c.j, 0x6),     #d
+    # (c.hlt,0x0),    #d
+    (c.j, 0x6),     #e
 ]
 
 pre_comp = []

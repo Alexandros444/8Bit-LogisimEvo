@@ -53,6 +53,11 @@ def Inop():
     i = []
     return i
 
+def I_HLT():
+    i = []
+    i.append(((OUT.NC,IN.NC),[SPEC.HLT]))
+    return i
+
 # Add A and B in Reg[EEP[Arg]]
 def IaddABInReg():
     i = []
@@ -113,7 +118,7 @@ def IDispReg():
 
 #              0                 1           2        3         4        5 ...
 #            0x0               0x10        0x20     0x30      0x40     0x50 ...
-instset = [Inop(), IaddABInReg(), IsubABInReg(), IloadA(), IloadB(), IJump(), IJumpReg(), ISetReg(), ILoadRegImm(), IDispReg()] # Muss mit instset_consts.py "c(enum)" übereinstimmen
+instset = [Inop(), IaddABInReg(), IsubABInReg(), IloadA(), IloadB(), IJump(), IJumpReg(), ISetReg(), ILoadRegImm(), IDispReg(), I_HLT()] # Muss mit instset_consts.py "c(enum)" übereinstimmen
 
 def IHE(inst):
     if(len(inst) > INST_LEN-RESERVED):
@@ -187,6 +192,8 @@ def pInstSPHex(inst):
     print("")
 
 import sys
+
+#Use v3 Hex as import
 
 if len(sys.argv) > 1:
     if sys.argv[1] == "io":

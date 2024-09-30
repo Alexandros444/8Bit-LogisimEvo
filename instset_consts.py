@@ -66,7 +66,7 @@ class SPEC(Enum):
     EPARG   = 0x08
     JUMP    = 0x10
     DI      = 0x20
-    NC2     = 0x40
+    HLT     = 0x40
     END     = 0x80
 
 class r(Enum):
@@ -98,6 +98,7 @@ class c(Enum):
     sr      = 0x7
     lri     = 0x8
     disp    = 0x9
+    hlt     = 0xA
 
 INST_LEN = 16
 RESERVED = 3
