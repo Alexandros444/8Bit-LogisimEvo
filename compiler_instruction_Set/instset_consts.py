@@ -67,7 +67,7 @@ class SPEC(Enum):
     JUMP    = 0x10
     DI      = 0x20
     HLT     = 0x40
-    END     = 0x80
+    RST     = 0x80
 
 class r(Enum):
     z       = 0x0
@@ -99,9 +99,18 @@ class c(Enum):
     lri     = 0x8
     disp    = 0x9
     hlt     = 0xA
+    ldai    = 0xB
+    ldbi    = 0xC
+    sta     = 0xD
+    jz      = 0xE
+
+
+# Umschreiben um C auf Funktionen zu mappen
+
+
 
 INST_LEN = 16
 RESERVED = 3
 
 instHead = [((OUT.PC, IN.EPA), []),((OUT.EP, IN.IR), [])]
-instEnd = [((0,0), [SPEC.PCINC, SPEC.END])]
+instEnd = [((0,0), [SPEC.PCINC, SPEC.RST])]

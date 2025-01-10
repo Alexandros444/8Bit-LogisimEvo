@@ -89,7 +89,14 @@ def IloadB():
 # Jump to EEP[ARG]
 def IJump():
     i = []
+    # Must Load zero in A and B
     i.append(((OUT.EP, IN.PC), [SPEC.EPARG]))
+    return i
+
+# Jump to EEP[ARG] if Zero
+def jumpIfZero():
+    i = []
+    i.append(((OUT.EP, IN.NC), [SPEC.EPARG, SPEC.JUMP, SPEC.ALUBINV, SPEC.ALUCIN]))
     return i
 
 # Jump befehle Setzen PC auf anderen Wert
@@ -97,7 +104,7 @@ def IJump():
 def IJumpReg():
     i = []
     i.append(((OUT.EP, IN.RMA), [SPEC.EPARG]))
-    i.append(((OUT.RM, IN.NC), [SPEC.JUMP]))
+    i.append(((OUT.RM, IN.NC), [SPEC.JUMP, SPEC.ALUBINV, SPEC.ALUCIN]))
     return i
 
 def ISetReg():
@@ -116,9 +123,27 @@ def IDispReg():
     i.append(((OUT.RM, IN.NC), [SPEC.DI]))
     return i
 
+def loadAImm():
+    i = []
+    i.append(((OUT.EP, IN.AR),[SPEC.EPARG]))
+    return i
+
+def loadBImm():
+    i = []
+    i.append(((OUT.EP, IN.BR),[SPEC.EPARG]))
+    return i
+
+def storeAinReg():
+    i = []
+    i.append(((OUT.EP, IN.RMA),[SPEC.EPARG]))
+    i.append(((OUT.AR, IN.RM),[]))
+    return i
+
 #              0                 1           2        3         4        5 ...
 #            0x0               0x10        0x20     0x30      0x40     0x50 ...
-instset = [Inop(), IaddABInReg(), IsubABInReg(), IloadA(), IloadB(), IJump(), IJumpReg(), ISetReg(), ILoadRegImm(), IDispReg(), I_HLT()] # Muss mit instset_consts.py "c(enum)" übereinstimmen
+instset = [Inop(), IaddABInReg(), IsubABInReg(), IloadA(), IloadB(), IJump(), IJumpReg(), ISetReg(), ILoadRegImm(), IDispReg(), I_HLT(), loadAImm(), loadBImm(), storeAinReg(), jumpIfZero()] # Muss mit instset_consts.py "c(enum)" übereinstimmen
+
+
 
 def IHE(inst):
     if(len(inst) > INST_LEN-RESERVED):
